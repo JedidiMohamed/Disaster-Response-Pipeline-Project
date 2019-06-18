@@ -14,7 +14,7 @@ Portfolio project to evalute Data Engineering skills including ETL and ML Pipeli
 
 3. Go to http://0.0.0.0:3001/
 # Files:
-data/process_data.py: The ETL pipeline used to process data in preparation for model training.
+data/process_data.py: The ETL pipeline used to process data in preparation for model training.  
 models/train_classifier.py: The Machine Learning pipeline used to fit, tune, evaluate, and export the model to a Python pickle.
-app/templates/*.html: HTML templates for the web app.
-run.py: Start the Python server for the web app and  visualizations.
+app/templates/*.html: HTML templates for the web app.  
+run.py: Start the Python server for the web app and  visualizations.  
