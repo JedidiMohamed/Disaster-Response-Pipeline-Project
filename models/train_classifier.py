@@ -18,7 +18,14 @@ from sklearn.multioutput import MultiOutputClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
 def load_data(path):
-
+      """
+    Loads data from database
+    Args:
+        database_filepath: path to database
+    Returns:
+         X: feature
+         Y: labels
+         """
     engine = create_engine('sqlite:///' + path)
     df = pd.read_sql_query('select * from Data', engine)
 
@@ -29,7 +36,13 @@ def load_data(path):
 
 
 def tokenize(text):
-
+"""
+    Tokenizes a given text.
+    Args:
+        text: text string
+    Returns:
+        clean_tokens:array of clean tokens
+""" 
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -43,7 +56,7 @@ def tokenize(text):
 
 def build_model():
   
-
+ """Builds the model """
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
@@ -60,7 +73,14 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
-
+    """
+    Evaluate the model against a test dataset
+    Args:
+        model: Trained model
+        X_test: Test features
+        Y_test: Test labels
+        category_names: String array of category names
+    """
     y_preds = model.predict(X_test)
     print(classification_report(y_preds, Y_test.values, target_names=category_names))
     print("**** Accuracy scores for each category *****\n")
@@ -69,7 +89,12 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
-
+    """
+    Save the model to a  pickle
+    Args:
+        model: Trained model
+        model_filepath: Path where to save the model
+    """
     pickle.dump(model, open(model_filepath, 'wb'))
 
 
